@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Vrüm — Preguntas frecuentes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #080C0A;
+    --surface: #0E1411;
+    --elevated: #131B17;
+    --hover: #18221D;
+    --border: #1E2622;
+    --border-strong: #2A3630;
+    --accent: #34ECAC;
+    --accent-dim: #1DB87E;
+    --accent-deep: #0D6B4A;
+    --accent-glow: rgba(52,236,172,0.15);
+    --text: #FFFFFF;
+    --text-2: #A8B5AE;
+    --text-3: #5E6B64;
+    --danger: #FF5A5A;
+    --warning: #FFB547;
+    --r: 14px;
+    --r-sm: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HERO */
+  #hero {
+    padding: 72px 0 48px;
+  }
+
+  .logo-mark {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--accent);
+    margin-bottom: 40px;
+    display: block;
+  }
+
+  .logo-mark span {
+    color: var(--text-3);
+    font-weight: 400;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    font-family: 'JetBrains Mono', monospace;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(32px, 9vw, 46px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+
+  .accent-text { color: var(--accent); }
+
+  .hero-sub {
+    margin-top: 16px;
+    font-size: 16px;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  /* SEARCH */
+  .search-wrap {
+    margin-top: 28px;
+    position: relative;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-3);
+    font-size: 16px;
+    pointer-events: none;
+  }
+
+  #searchInput {
+    width: 100%;
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r);
+    padding: 14px 14px 14px 42px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  #searchInput::placeholder { color: var(--text-3); }
+  #searchInput:focus { border-color: var(--accent); }
+
+  .no-results {
+    display: none;
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-3);
+    font-size: 14px;
+  }
+
+  /* CATEGORÍAS */
+  .cat-tabs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  .cat-tab {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 1px solid var(--border-strong);
+    background: transparent;
+    color: var(--text-3);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .cat-tab:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .cat-tab.active {
+    background: rgba(52,236,172,0.1);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* FAQ SECTIONS */
+  .faq-section {
+    padding: 40px 0 0;
+  }
+
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-3);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-title::before {
+    content: '';
+    width: 3px;
+    height: 14px;
+    background: var(--accent);
+    border-radius: 2px;
+    display: inline-block;
+  }
+
+  /* ACCORDION */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .faq-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+
+  .faq-item.hidden { display: none; }
+
+  .faq-item.open {
+    border-color: rgba(52,236,172,0.25);
+  }
+
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 18px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s;
+  }
+
+  .faq-q:hover { background: var(--hover); }
+
+  .faq-q-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .faq-item.open .faq-q-text { color: var(--accent); }
+
+  .faq-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--elevated);
+    border: 1px solid var(--border-strong);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 14px;
+    color: var(--text-3);
+    transition: all 0.25s;
+    margin-top: 1px;
+  }
+
+  .faq-item.open .faq-icon {
+    background: rgba(52,236,172,0.1);
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: rotate(45deg);
+  }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+
+  .faq-item.open .faq-a {
+    max-height: 400px;
+  }
+
+  .faq-a-inner {
+    padding: 0 18px 18px;
+    border-top: 1px solid var(--border);
+    padding-top: 14px;
+  }
+
+  .faq-a-inner p {
+    font-size: 14px;
+    color: var(--text-2);
+    line-height: 1.65;
+  }
+
+  .faq-a-inner strong { color: var(--text); font-weight: 600; }
+  .faq-a-inner .accent { color: var(--accent); font-weight: 600; }
+
+  .faq-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 100px;
+    margin-bottom: 10px;
+  }
+
+  .tag-producto { background: rgba(52,236,172,0.08); color: var(--accent); border: 1px solid rgba(52,236,172,0.2); }
+  .tag-servicio { background: rgba(77,163,255,0.08); color: #4DA3FF; border: 1px solid rgba(77,163,255,0.2); }
+  .tag-precio { background: rgba(255,181,71,0.08); color: var(--warning); border: 1px solid rgba(255,181,71,0.2); }
+  .tag-local { background: rgba(255,90,90,0.08); color: var(--danger); border: 1px solid rgba(255,90,90,0.2); }
+
+  /* CTA FINAL */
+  #cta {
+    padding: 56px 0 72px;
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+    text-align: center;
+  }
+
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(24px, 7vw, 32px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .cta-sub {
+    margin-top: 12px;
+    font-size: 15px;
+    color: var(--text-2);
+    line-height: 1.6;
+  }
+
+  .btn-primary {
+    display: block;
+    width: 100%;
+    margin-top: 28px;
+    padding: 18px 24px;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: var(--r);
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s;
+    letter-spacing: -0.01em;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-dim);
+    box-shadow: 0 0 40px rgba(52,236,172,0.3);
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    padding: 16px 24px;
+    background: transparent;
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r);
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .link-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-3);
+    text-decoration: none;
+    margin-bottom: 32px;
+    transition: color 0.2s;
+  }
+
+  .link-back:hover { color: var(--accent); }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-brand {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .footer-sub {
+    font-size: 11px;
+    color: var(--text-3);
+    margin-top: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: all 0.4s ease-out;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<section id="hero">
+  <div class="wrap">
+    <a href="https://vrum.nikatoestudio.uy" class="link-back">← Volver a Vrüm</a>
+
+    <span class="logo-mark">Vrüm<span>by Nikato Estudio</span></span>
+
+    <div class="reveal">
+      <span class="eyebrow">Preguntas frecuentes</span>
+      <h1>Todo lo que<br>necesitás<br><span class="accent-text">saber.</span></h1>
+      <p class="hero-sub">Resolvemos las dudas más comunes antes de que las tengas. Si no encontrás lo que buscás, escribinos directo.</p>
+    </div>
+
+    <div class="search-wrap reveal">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Buscar una pregunta..." oninput="filterFAQ()">
+    </div>
+
+    <div class="cat-tabs reveal">
+      <button class="cat-tab active" onclick="filterCat('all', this)">Todas</button>
+      <button class="cat-tab" onclick="filterCat('producto', this)">El sistema</button>
+      <button class="cat-tab" onclick="filterCat('servicio', this)">Servicio</button>
+      <button class="cat-tab" onclick="filterCat('precio', this)">Precio</button>
+      <button class="cat-tab" onclick="filterCat('local', this)">Paysandú</button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ PRODUCTO -->
+<div class="faq-section" id="sec-producto">
+  <div class="wrap">
+    <div class="section-title">El sistema</div>
+    <div class="faq-list">
+
+      <div class="faq-item reveal" data-cat="producto" data-q="necesito saber tecnología celular app sistema">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Necesito saber de tecnología para usarlo?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-producto">Sistema</span>
+            <p>No. Si sabés usar WhatsApp, sabés usar Vrüm. La interfaz está pensada para el dueño de automotora, no para un técnico. <strong>Todo es táctil, visual y en español rioplatense.</strong> En la capacitación de 30 minutos que hacemos al activarlo, tu equipo ya sabe manejarlo solo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="producto" data-q="celular funciona mobile teléfono">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Funciona desde el celular?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-producto">Sistema</span>
+            <p>Sí, está diseñado primero para el celular. Abrís el navegador, entrás a tu URL y listo — funciona como una app sin tener que instalar nada. <strong>Vos, tus vendedores y tus clientes lo usan desde cualquier celular.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="producto" data-q="internet sin conexión offline wifi">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Qué pasa si no tengo internet en el local?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-producto">Sistema</span>
+            <p>Vrüm necesita internet para sincronizar el stock en tiempo real. Con los datos del celular (3G o mejor) funciona perfecto — no necesitás WiFi. <strong>La mayoría de las acciones del día a día consumen muy pocos datos.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="producto" data-q="privado datos costos precios margen secreto">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Mis costos y márgenes son privados?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-producto">Sistema</span>
+            <p>100%. El catálogo público que ven los clientes <strong>nunca muestra tus costos, tus márgenes ni tus datos internos</strong> — solo lo que vos querés mostrar: fotos, precio de venta y descripción. Los datos financieros los ve solo el admin (vos).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="producto" data-q="vendedores equipo varios usuarios roles">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Puedo tener más de un vendedor usando el sistema?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-producto">Sistema</span>
+            <p>Sí. Podés crear usuarios para cada vendedor con su propio acceso. <strong>Cada uno ve el stock en tiempo real</strong>, puede compartir autos por WhatsApp y registrar sus ventas. El admin ve todo; los vendedores solo ven lo que necesitan para trabajar.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="producto" data-q="motos camiones maquinaria vehículos tipos">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Funciona para motos, camiones o maquinaria?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-producto">Sistema</span>
+            <p>Sí. Vrüm gestiona cualquier tipo de vehículo — autos, motos, camionetas, camiones, maquinaria agrícola. <strong>Los campos se adaptan a lo que vendés</strong>, no estás limitado a un solo tipo de vehículo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="producto" data-q="google catálogo aparece búsqueda SEO">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿El catálogo aparece en Google?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-producto">Sistema</span>
+            <p>El catálogo es público y accesible — Google puede indexarlo con el tiempo. <strong>Principalmente es una herramienta de venta directa</strong>: mandás el link por WhatsApp y el cliente ve tus autos al instante, sin tener que buscarte en Google.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="producto" data-q="ocultar precio sin precio consultar">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Puedo ocultar el precio de algún auto?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-producto">Sistema</span>
+            <p>Sí. Podés publicar un auto con precio visible o con la leyenda <strong>"Consultar precio"</strong> — útil para vehículos donde preferís negociar directo. El control es tuyo en cada auto.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="producto" data-q="celular roto perdido datos backup">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Qué pasa si se me rompe el celular o lo pierdo?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-producto">Sistema</span>
+            <p>No pasa nada. <strong>Todos tus datos están en la nube</strong>, no en el celular. Entrás desde cualquier otro celular o computadora con tu usuario y contraseña y todo está igual que siempre. No perdés ni un auto.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="producto" data-q="estadísticas visitas vistas catálogo métricas">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Puedo ver cuántas personas vieron mi catálogo?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-producto">Sistema</span>
+            <p>Sí. El dashboard muestra las estadísticas de tu stock: autos más vistos, días en stock por vehículo, actividad del equipo y más. <strong>Información real para tomar mejores decisiones de compra.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="producto" data-q="mercado libre infocasas diferencia comparación">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Es lo mismo que Mercado Libre o InfoAutos?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-producto">Sistema</span>
+            <p>No, son cosas distintas. Mercado Libre e InfoAutos son <strong>plataformas de clasificados</strong> donde competís con miles de vendedores y pagás por publicar. Vrüm es <strong>tu propio sistema privado</strong>: gestionás tu stock, controlás tus datos y compartís directo con tus clientes sin intermediarios ni comisiones.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FAQ SERVICIO -->
+<div class="faq-section" id="sec-servicio">
+  <div class="wrap">
+    <div class="section-title">Servicio y soporte</div>
+    <div class="faq-list">
+
+      <div class="faq-item reveal" data-cat="servicio" data-q="quien carga autos fotos stock inicio arranque">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Quién carga los autos al principio?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-servicio">Servicio</span>
+            <p>Vos o tu equipo, con nuestra guía. <strong>Creamos tu cuenta, te mandamos acceso el mismo día y te acompañamos en el proceso de carga.</strong> La capacitación de 30 minutos que hacemos al activarlo incluye aprender a cargar autos — es simple y rápido.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="servicio" data-q="tiempo cuanto demora funcionar activo 48 horas">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿En cuánto tiempo está funcionando?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-servicio">Servicio</span>
+            <p><strong>48 horas desde que confirmás.</strong> El mismo día que arrancamos creamos tu cuenta y te mandamos el acceso. En ese plazo tu equipo ya puede usar el sistema. Sin esperas largas, sin burocracia.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="servicio" data-q="problema duda soporte ayuda consulta contacto">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Qué pasa si tengo un problema o una duda?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-servicio">Servicio</span>
+            <p>Me escribís por WhatsApp directo a mí — no a un call center ni a un formulario. <strong>Soporte de lunes a sábado de 9 a 19hs.</strong> Al ser de Paysandú, si algo lo requiere puedo pasarme por el local.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="servicio" data-q="datos guardados servidor seguridad dónde">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Dónde están guardados mis datos?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-servicio">Servicio</span>
+            <p>En servidores seguros en la nube con <strong>backups automáticos</strong>. Tus datos son tuyos — si algún día decidís no continuar, te los entrego en planilla sin problema. Nunca compartimos información de tu negocio con terceros.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FAQ PRECIO -->
+<div class="faq-section" id="sec-precio">
+  <div class="wrap">
+    <div class="section-title">Precio y contrato</div>
+    <div class="faq-list">
+
+      <div class="faq-item reveal" data-cat="precio" data-q="contrato largo permanencia meses años">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Hay contrato largo?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-precio">Precio</span>
+            <p>No. <strong>La suscripción es mes a mes, sin permanencia mínima.</strong> Pagás mientras lo usás y lo valor que te da. Si decidís no continuar, avisás y listo — sin multas ni letra chica.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="precio" data-q="cancelar salir baja dejar de usar">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Qué pasa si quiero cancelar?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-precio">Precio</span>
+            <p>Me avisás por WhatsApp y cancelamos. <strong>Te entrego todos tus datos en planilla</strong> para que no pierdas nada. Sin vueltas, sin presiones. Igual, en 5 años nadie que lo probó bien quiso irse.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="precio" data-q="precio sube aumento futuro garantía">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿El precio puede subir?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-precio">Precio</span>
+            <p>El setup sube a USD 750 en julio — por eso el precio fundador de USD 350 es solo este mes. <strong>La suscripción mensual de USD 70 se mantiene para los primeros clientes.</strong> Cualquier cambio futuro se avisa con 60 días de anticipación, nunca de sorpresa.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="precio" data-q="mensual incluye qué cubre suscripción">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Qué incluye el pago mensual?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-precio">Precio</span>
+            <p>El uso completo del sistema, el hosting, las actualizaciones automáticas y el soporte directo. <strong>No hay costos ocultos ni extras por usuarios o autos.</strong> Cargás los autos que tengas, creás los usuarios que necesites — todo por el mismo precio.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="precio" data-q="garantía devolución 30 días no sirve">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Qué es exactamente la garantía de 30 días?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-precio">Precio</span>
+            <p>Simple: <strong>si en los primeros 30 días no le encontrás valor, te devuelvo el 100% del setup.</strong> Sin preguntas, sin pedirte que justifiques nada. Lo activo, lo usás, y si no te convence me avisás. El riesgo es mío, no tuyo.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FAQ LOCAL -->
+<div class="faq-section" id="sec-local">
+  <div class="wrap">
+    <div class="section-title">Paysandú y el interior</div>
+    <div class="faq-list">
+
+      <div class="faq-item reveal" data-cat="local" data-q="otros usan paysandú clientes referencias">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Otros en Paysandú ya lo usan?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-local">Paysandú</span>
+            <p>Estamos en el lanzamiento en la ciudad — <strong>sos de los primeros</strong>, por eso existe el precio fundador. Las primeras automotoras que entren este mes van a tener ventaja sobre las que entren después. Si querés hablar con alguien que ya lo use, te pongo en contacto directo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" data-cat="local" data-q="montevideo empresa local dónde sos de acá">
+        <button class="faq-q" onclick="toggle(this)">
+          <span class="faq-q-text">¿Vos sos de acá o es una empresa de Montevideo?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            <span class="faq-tag tag-local">Paysandú</span>
+            <p>Soy de Paysandú. <strong>Nikato Estudio es una agencia del interior</strong> — no una empresa de Montevideo que te manda un representante cada seis meses. Cuando tenés un problema, me escribís a mí directo y si hace falta me paso por el local. Así de simple.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- NO RESULTS -->
+<div class="wrap">
+  <div class="no-results" id="noResults">
+    No encontramos esa pregunta. Escribinos directo y te respondemos. 👇
+  </div>
+</div>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">¿Quedó alguna duda?</span>
+      <h2>Hablamos<br><span class="accent-text">directo.</span></h2>
+      <p class="cta-sub">Santi te responde por WhatsApp. Sin formularios, sin esperas, sin vendedores automáticos.</p>
+
+      <a href="https://wa.me/59891711034?text=Hola%20Santi%2C%20tengo%20una%20pregunta%20sobre%20Vr%C3%BCm" class="btn-primary">
+        Escribir por WhatsApp →
+      </a>
+      <a href="https://vrum.nikatoestudio.uy" class="btn-secondary">
+        Ver la presentación completa
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-brand">Vrüm</div>
+    <div class="footer-sub">by Nikato Estudio · Paysandú, Uruguay</div>
+  </div>
+</footer>
+
+<script>
+  // ACCORDION
+  function toggle(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // SEARCH
+  function filterFAQ() {
+    const q = document.getElementById('searchInput').value.toLowerCase().trim();
+    const items = document.querySelectorAll('.faq-item');
+    let visible = 0;
+
+    items.forEach(item => {
+      const text = (item.dataset.q + ' ' + item.querySelector('.faq-q-text').textContent).toLowerCase();
+      const match = !q || text.includes(q);
+      item.classList.toggle('hidden', !match);
+      if (match) visible++;
+    });
+
+    document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
+
+    // Mostrar/ocultar section titles
+    document.querySelectorAll('.faq-section').forEach(sec => {
+      const hasVisible = sec.querySelectorAll('.faq-item:not(.hidden)').length > 0;
+      sec.style.display = hasVisible ? '' : 'none';
+    });
+  }
+
+  // CATEGORY FILTER
+  function filterCat(cat, btn) {
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('searchInput').value = '';
+
+    const items = document.querySelectorAll('.faq-item');
+    items.forEach(item => {
+      item.classList.toggle('hidden', cat !== 'all' && item.dataset.cat !== cat);
+    });
+
+    document.querySelectorAll('.faq-section').forEach(sec => {
+      const hasVisible = sec.querySelectorAll('.faq-item:not(.hidden)').length > 0;
+      sec.style.display = hasVisible ? '' : 'none';
+    });
+
+    document.getElementById('noResults').style.display = 'none';
+  }
+
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 60);
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
